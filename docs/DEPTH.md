@@ -29,6 +29,10 @@
 | TRAP-14 | 同版冲突 | 最后覆盖 | 整组隔离 | `app/modules/m2_mapping/rules.py` | `tests/test_mapping.py::test_real_conflict_quarantine` |
 | TRAP-18 | 三种空态 | 除零或伪成功 | 三个错误码 | `app/modules/m1_ingest/reader.py` | `tests/test_ingest.py::test_empty_three_states` |
 | TRAP-26 | 旧版本复核 | 覆盖新结论 | 事务条件更新 | `app/store.py` | `tests/test_archive.py::test_stale_review` |
+| TRAP-27 | 签审后撤销补到 | 改写已签审证据 | 另立补退结论，签审入档可追 | `app/supplement.py`、`app/store.py` | `tests/test_supplement.py::test_supplement_created_and_signoff_traceable` |
+| TRAP-28 | 补退重试 | 重复退款 | 幂等键去重，同键异额409 | `app/store.py` | `tests/test_supplement.py::test_retry_same_supplement_adds_no_refund` |
+| TRAP-29 | 切换旧结果中断 | 旧版丢失或旧签名对不上 | 单事务原子切换，失败回滚 | `app/store.py` | `tests/test_supplement.py::test_failed_switch_keeps_old_version_and_signoff` |
+| TRAP-30 | 页面与下载净额分叉 | 各算各的 | 同一存储同一净额函数 | `app/store.py`、`app/modules/m7_archive/export_out.py` | `tests/test_supplement.py::test_page_and_download_share_net` |
 | TRAP-23 | 生效日端点 | 双计生效日 | 半开区间 | `app/modules/m4_segments/rules.py` | `tests/test_segments.py::test_halfopen_conservation` |
 | TRAP-24 | 分币尾差 | 段合计不等 | 最大余额法 | `app/modules/m5_calculate/rules.py` | `tests/test_calculate.py::test_largest_remainder_conserves` |
 
